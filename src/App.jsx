@@ -240,7 +240,7 @@ export default function RoomHorror() {
         triggerGlitch();
       }
 
-      const isEnding = replyText.includes("언젠가, 네가 나를 부르면 다시 올게");
+      const isEnding = replyText.includes("나를 부르면") || replyText.includes("다시 올게");
       if (isEnding) {
         setTimeout(() => setEnded(true), 1500);
       }
@@ -470,14 +470,10 @@ export default function RoomHorror() {
               disabled={loading || ended}
             />
             <button className="send-btn" onClick={sendMessage} disabled={loading || !input.trim()}>전송</button>
-            {ended ? (
-              <button
-                className="knock-btn"
-                onClick={restart}
-              >똑똑<br/>거기 있니</button>
-            ) : (
-              <button className="restart-btn" onClick={restart}>↺</button>
-            )}
+            <button
+              className={ended ? "knock-btn" : "restart-btn"}
+              onClick={restart}
+            >{ended ? <span>똑똑<br/>거기 있니</span> : "↺"}</button>
           </div>
         </div>
       </div>
