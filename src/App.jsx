@@ -8,12 +8,12 @@ const INTRO_MESSAGE = {
 const getBgColor = (turn) => {
   if (turn === 0) return { bg: "#f5f0e8", text: "#3a2e22" };
   if (turn === 1) return { bg: "#e8e0d0", text: "#3a2e22" };
-  if (turn === 2) return { bg: "#d0c4b0", text: "#2e2418" };
-  if (turn === 3) return { bg: "#a89880", text: "#1e1810" };
-  if (turn === 4) return { bg: "#706050", text: "#e8d8b8" };
-  if (turn === 5) return { bg: "#40342a", text: "#d4c4a0" };
-  if (turn === 6) return { bg: "#201810", text: "#c8b890" };
-  return { bg: "#080808", text: "#c8c0b0" };
+  if (turn === 2) return { bg: "#d0c4b0", text: "#2a1e10" };
+  if (turn === 3) return { bg: "#a89880", text: "#1a1008" };
+  if (turn === 4) return { bg: "#706050", text: "#f0e0c0" };
+  if (turn === 5) return { bg: "#40342a", text: "#f0ddb8" };
+  if (turn === 6) return { bg: "#201810", text: "#eeddb0" };
+  return { bg: "#080808", text: "#e8dcc8" };
 };
 
 // ── Audio Engine ──────────────────────────────────────────
