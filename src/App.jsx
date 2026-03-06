@@ -176,7 +176,6 @@ const audioEngine = new HorrorAudio();
 
 export default function RoomHorror() {
   const [showIntro, setShowIntro] = useState(true);
-  const [ended, setEnded] = useState(false);
   const [messages, setMessages] = useState([INTRO_MESSAGE]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -240,10 +239,6 @@ export default function RoomHorror() {
         triggerGlitch();
       }
 
-      const isEnding = replyText.includes("나를 부르면") || replyText.includes("다시 올게");
-      if (isEnding) {
-        setTimeout(() => setEnded(true), 1500);
-      }
       setMessages(prev => [...prev, { role: "assistant", content: replyText }]);
     } catch {
       setMessages(prev => [...prev, { role: "assistant", content: "..." }]);
@@ -267,7 +262,6 @@ export default function RoomHorror() {
     setGlitch(false);
     setStaticEffect(false);
     setAudioStarted(false);
-    setEnded(false);
     setShowIntro(true);
   };
 
@@ -374,23 +368,6 @@ export default function RoomHorror() {
         .send-btn:disabled { opacity: 0.15; cursor: default; }
         .restart-btn { background: none; border: none; color: currentColor; cursor: pointer; font-size: 1rem; padding: 0.4rem; opacity: 0.18; transition: opacity 0.2s; }
         .restart-btn:hover { opacity: 0.5; }
-        .ended-overlay {
-          position: absolute; inset: 0; z-index: 50; pointer-events: none;
-          background: #000;
-          opacity: 0; transition: opacity 4s ease;
-        }
-        .ended-overlay.on { opacity: 0.92; }
-        .knock-btn {
-          background: none; border: 1px solid rgba(255,255,255,0.15);
-          color: rgba(255,255,255,0.5);
-          font-family: 'Nanum Myeongjo', serif;
-          font-size: 0.65rem; line-height: 1.6; letter-spacing: 0.1em;
-          padding: 0.5rem 0.75rem; cursor: pointer;
-          border-radius: 3px; text-align: center;
-          transition: all 0.3s; white-space: nowrap;
-          pointer-events: all;
-        }
-        .knock-btn:hover { border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.8); }
       `}</style>
 
       {showIntro && (
@@ -445,7 +422,6 @@ export default function RoomHorror() {
         </div>
 
         <div className={`glitch-wrap ${glitch ? "glitching" : ""}`}>
-          <div className={`ended-overlay ${ended ? "on" : ""}`} />
           <div className="chat">
             {messages.map((msg, i) => {
               const isHorrorMsg = isHorror && msg.role === "assistant" && horrorStart !== -1 && i >= horrorStart;
@@ -467,13 +443,10 @@ export default function RoomHorror() {
               onKeyDown={handleKey}
               placeholder="..."
               rows={1}
-              disabled={loading || ended}
+              disabled={loading}
             />
             <button className="send-btn" onClick={sendMessage} disabled={loading || !input.trim()}>전송</button>
-            <button
-              className={ended ? "knock-btn" : "restart-btn"}
-              onClick={restart}
-            >{ended ? <span>똑똑<br/>거기 있니</span> : "↺"}</button>
+            <button className="restart-btn" onClick={restart}>↺</button>
           </div>
         </div>
       </div>
