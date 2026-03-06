@@ -323,7 +323,7 @@ export default function RoomHorror() {
 
         .msg { max-width: 75%; line-height: 1.85; font-size: 1rem; white-space: pre-wrap; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-        .msg.user { align-self: flex-end; font-size: 0.9rem; text-align: right; border-right: 2px solid rgba(0,0,0,0.15); padding-right: 0.75rem; max-width: 65%; opacity: 0.65; }
+        .msg.user { align-self: flex-end; font-size: 0.9rem; text-align: right; border-right: 2px solid rgba(0,0,0,0.2); padding-right: 0.75rem; max-width: 65%; opacity: 1; }
         .msg.ai { align-self: flex-start; }
         .msg.ai.horror { font-weight: 700; animation: fadeIn 0.3s ease, flicker 5s infinite; }
         @keyframes flicker { 0%,95%,100%{opacity:1} 96%{opacity:0.6} 98%{opacity:0.8} 99%{opacity:0.5} }
